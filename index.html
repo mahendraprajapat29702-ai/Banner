@@ -31,34 +31,45 @@
         @keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
         /* NAVBAR */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); position: fixed; width: 100%; top: 0; z-index: 100; border-bottom: 1px solid var(--border); }
-        .logo { font-size: 1.3rem; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 4%; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); position: fixed; width: 100%; top: 0; z-index: 100; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 10px; }
+        .logo { font-size: 1.2rem; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 6px; cursor: pointer; }
         .logo i { color: var(--accent); }
-        .nav-links { display: flex; gap: 1.8rem; align-items: center; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; transition: color 0.2s; cursor: pointer; font-size: 0.95rem; }
+        .nav-links { display: flex; gap: 1.2rem; align-items: center; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; transition: color 0.2s; cursor: pointer; font-size: 0.9rem; }
         .nav-links a:hover { color: var(--accent); }
-        .auth-btns { display: flex; gap: 8px; }
-        .auth-btns button { padding: 0.5rem 1.2rem; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.2s; border: none; font-size: 0.9rem; }
+        .auth-btns { display: flex; gap: 6px; align-items: center; }
+        .auth-btns button { padding: 0.45rem 1rem; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.2s; border: none; font-size: 0.85rem; }
         .btn-login { background: transparent; color: var(--text-main); border: 1px solid var(--border); }
         .btn-login:hover { background: rgba(0,0,0,0.04); }
         .btn-primary { background: var(--accent); color: white; box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3); }
         .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+        
+        #userProfileDisplay { font-size: 0.85rem; font-weight: 600; color: var(--accent); display: none; }
+        .btn-logout { background: #ff3b30; color: white; display: none; }
+
+        @media (max-width: 768px) {
+            nav { padding: 0.8rem 3%; justify-content: space-between; }
+            .nav-links { display: none; }
+            .mobile-nav-bar { display: flex; width: 100%; justify-content: space-around; border-top: 1px solid var(--border); padding-top: 6px; margin-top: 4px; }
+            .mobile-nav-bar a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; font-weight: 500; cursor: pointer; }
+        }
+        @media (min-width: 769px) { .mobile-nav-bar { display: none; } }
 
         /* HERO SECTION */
-        .hero { padding: 140px 5% 60px; text-align: center; animation: fadeIn 0.8s ease-out; }
-        .hero h1 { font-size: 3rem; margin-bottom: 1rem; letter-spacing: -0.5px; }
+        .hero { padding: 150px 5% 60px; text-align: center; animation: fadeIn 0.8s ease-out; }
+        .hero h1 { font-size: 2.6rem; margin-bottom: 1rem; letter-spacing: -0.5px; }
         .hero h1 span { color: var(--accent); }
-        .hero p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2rem; max-width: 600px; margin-inline: auto; }
+        .hero p { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 2rem; max-width: 600px; margin-inline: auto; }
 
-        /* STUDIO TABS SWITCHER */
-        .studio-tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; }
-        .tab-btn { padding: 0.6rem 1.5rem; border-radius: 30px; border: 1px solid var(--border); background: var(--surface-solid); font-weight: 600; cursor: pointer; transition: 0.2s; color: var(--text-muted); }
+        /* STUDIO TABS */
+        .studio-tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .tab-btn { padding: 0.6rem 1.4rem; border-radius: 30px; border: 1px solid var(--border); background: var(--surface-solid); font-weight: 600; cursor: pointer; transition: 0.2s; color: var(--text-muted); font-size: 0.9rem; }
         .tab-btn.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 4px 12px rgba(0, 113, 227, 0.25); }
 
         /* TOOL SECTION */
-        .tool-section { padding: 10px 5% 80px; }
+        .tool-section { padding: 10px 5% 60px; }
         .tool-container { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; max-width: 1200px; margin: auto; background: var(--surface); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow); }
-        @media (max-width: 900px) { .tool-container { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) { .tool-container { grid-template-columns: 1fr; padding: 1.5rem; } }
         
         .controls { display: flex; flex-direction: column; gap: 1.2rem; }
         .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
@@ -72,7 +83,6 @@
         .studio-canvas { position: relative; width: 100%; max-width: 380px; height: 500px; background-size: cover; background-position: center; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 15px 35px rgba(0,0,0,0.1); display: none; }
         .studio-canvas.active { display: block; }
 
-        /* Banner Themes */
         .poster-canvas.theme-gold { background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1604085572504-a392ddf0d86a?q=80&w=1000&auto=format&fit=crop'); border: 3px solid #fbbf24; }
         .theme-gold .poster-title { color: #fbbf24; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
         .theme-gold .user-name-badge { background: #fbbf24; color: #000; }
@@ -95,13 +105,12 @@
         .user-photo-preview { width: 110px; height: 110px; object-fit: cover; border-radius: 50%; border-width: 3px; border-style: solid; margin: 0 auto 12px; display: none; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
         .user-name-badge { padding: 6px 22px; font-weight: 700; border-radius: 30px; font-size: 16px; display: inline-block; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
 
-        /* Logo Generator Canvas Styling */
         .logo-canvas { background: linear-gradient(135deg, #0f172a, #1e293b); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 30px; border: 3px solid var(--accent); }
         .logo-emblem { width: 90px; height: 90px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 38px; color: white; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(0, 113, 227, 0.4); }
         .logo-brand-text { font-size: 28px; font-weight: 800; font-family: 'Poppins', sans-serif; margin-bottom: 6px; letter-spacing: -0.5px; }
         .logo-tagline-text { font-size: 13px; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* MODALS (GENERAL) */
+        /* MODALS */
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(15px); z-index: 999; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         .modal-overlay.active { opacity: 1; pointer-events: all; }
         .modal-box { background: var(--surface-solid); border: 1px solid var(--border); padding: 2.5rem; border-radius: 24px; width: 100%; max-width: 440px; position: relative; animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 25px 50px rgba(0,0,0,0.15); max-height: 90vh; overflow-y: auto; }
@@ -110,11 +119,6 @@
         .modal-box h2 { margin-bottom: 1.2rem; font-size: 1.5rem; letter-spacing: -0.5px; }
         .switch-modal { text-align: center; margin-top: 1.2rem; color: var(--text-muted); font-size: 0.9rem; }
         .switch-modal span { color: var(--accent); cursor: pointer; font-weight: 600; text-decoration: underline; }
-
-        /* Website Full Details Content Styling */
-        .details-content p { font-size: 0.95rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1rem; }
-        .details-content ul { list-style: disc; padding-left: 20px; margin-bottom: 1rem; color: var(--text-muted); }
-        .details-content li { margin-bottom: 0.5rem; font-size: 0.9rem; }
 
         /* FOOTER */
         footer { background: #ffffff; padding: 60px 5% 30px; border-top: 1px solid var(--border); color: var(--text-muted); }
@@ -125,9 +129,6 @@
         .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
         .footer-col ul li a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; cursor: pointer; }
         .footer-col ul li a:hover { color: var(--accent); }
-        .social-icons { display: flex; gap: 1rem; margin-top: 1rem; }
-        .social-icons a { width: 36px; height: 36px; background: var(--bg); display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--text-main); text-decoration: none; transition: 0.2s; }
-        .social-icons a:hover { background: var(--accent); color: white; }
         .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.85rem; }
     </style>
 </head>
@@ -136,14 +137,24 @@
     <!-- NAVBAR -->
     <nav>
         <div class="logo" onclick="openModal('detailsModal')"><i class="fa-solid fa-wand-magic-sparkles"></i> Utsav Pro</div>
+        
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#tool">Studio</a>
             <a onclick="openModal('detailsModal')">Website Details</a>
         </div>
+        
         <div class="auth-btns">
-            <button class="btn-login" onclick="openModal('loginModal')">Login</button>
-            <button class="btn-primary" onclick="openModal('registerModal')">Create Account</button>
+            <span id="userProfileDisplay"></span>
+            <button class="btn-login" id="navLoginBtn" onclick="openModal('loginModal')">Login</button>
+            <button class="btn-primary" id="navRegisterBtn" onclick="openModal('registerModal')">Sign Up</button>
+            <button class="btn-primary btn-logout" id="navLogoutBtn" onclick="handleLogout()">Logout</button>
+        </div>
+
+        <div class="mobile-nav-bar">
+            <a href="#home">Home</a>
+            <a href="#tool">Studio</a>
+            <a onclick="openModal('detailsModal')">Details</a>
         </div>
     </nav>
 
@@ -154,7 +165,7 @@
         <a href="#tool"><button class="btn-primary" style="padding: 0.8rem 1.8rem; border-radius: 30px; font-size: 1rem; border: none; cursor: pointer;">Open Studio <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i></button></a>
     </section>
 
-    <!-- STUDIO SECTION WITH TABS (BANNER & LOGO MAKER) -->
+    <!-- STUDIO SECTION -->
     <section id="tool" class="tool-section">
         <div class="studio-tabs">
             <button class="tab-btn active" id="tabBannerBtn" onclick="switchStudioTab('banner')"><i class="fa-solid fa-image"></i> Festival Banner Maker</button>
@@ -241,7 +252,6 @@
 
             <!-- PREVIEW AREA -->
             <div class="preview-area">
-                <!-- Banner Canvas -->
                 <div class="studio-canvas poster-canvas theme-gold active" id="bannerDownloadArea">
                     <div class="poster-overlay">
                         <img id="displayPhoto" class="user-photo-preview" src="" alt="User">
@@ -253,7 +263,6 @@
                     </div>
                 </div>
 
-                <!-- Logo Canvas -->
                 <div class="studio-canvas logo-canvas" id="logoDownloadArea">
                     <div class="logo-emblem">
                         <i id="displayLogoIcon" class="fa-solid fa-wand-magic-sparkles"></i>
@@ -265,26 +274,18 @@
         </div>
     </section>
 
-    <!-- RICH FOOTER -->
+    <!-- FOOTER -->
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
                 <div class="logo" style="margin-bottom: 1rem;" onclick="openModal('detailsModal')"><i class="fa-solid fa-wand-magic-sparkles"></i> Utsav Pro</div>
                 <p>The ultimate fluid design platform engineered for creators, marketers, and individuals seeking professional-grade festival creatives instantly.</p>
-                <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
-                </div>
             </div>
             <div class="footer-col">
                 <h3>Quick Links</h3>
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#tool">Banner Studio</a></li>
-                    <li><a onclick="switchStudioTab('logo'); document.getElementById('tool').scrollIntoView();">Logo Designer</a></li>
-                    <li><a onclick="openModal('loginModal')">Login</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -292,21 +293,17 @@
                 <ul>
                     <li><a onclick="openModal('detailsModal')">Festival Templates</a></li>
                     <li><a onclick="openModal('detailsModal')">HD Image Export</a></li>
-                    <li><a onclick="openModal('detailsModal')">Custom Branding</a></li>
-                    <li><a onclick="openModal('detailsModal')">Account Sync</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h3>Help & Details</h3>
                 <ul>
                     <li><a onclick="openModal('detailsModal')">Website Full Details</a></li>
-                    <li><a onclick="openModal('registerModal')">Create Account (AC)</a></li>
-                    <li><a onclick="openModal('detailsModal')">Privacy Guidelines</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Utsav Pro Inc. All rights reserved. Crafted with liquid precision.</p>
+            <p>&copy; 2026 Utsav Pro Inc. All rights reserved.</p>
         </div>
     </footer>
 
@@ -315,66 +312,136 @@
         <div class="modal-box">
             <button class="close-btn" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
             <h2>Welcome Back</h2>
-            <div class="form-group" style="margin-bottom: 1rem;">
-                <label>Email Address</label>
-                <input type="email" placeholder="name@example.com">
-            </div>
-            <div class="form-group" style="margin-bottom: 1.5rem;">
-                <label>Password</label>
-                <input type="password" placeholder="Enter your password">
-            </div>
-            <button class="btn-primary" style="width: 100%; padding: 0.9rem; border-radius: 12px; border: none; font-weight: 600; cursor: pointer;">Secure Login</button>
+            <form onsubmit="handleFirebaseLogin(event)">
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label>Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="name@example.com" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; padding: 0.9rem; border-radius: 12px; border: none; font-weight: 600; cursor: pointer;">Secure Login</button>
+            </form>
             <div class="switch-modal" onclick="switchModal('registerModal')">Don't have an account? <span>Create Account</span></div>
         </div>
     </div>
 
-    <!-- MODAL 2: REGISTER / CREATE ACCOUNT (AC) POPUP -->
+    <!-- MODAL 2: REGISTER POPUP -->
     <div class="modal-overlay" id="registerModal">
         <div class="modal-box">
             <button class="close-btn" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
             <h2>Create Account</h2>
-            <div class="form-group" style="margin-bottom: 1rem;">
-                <label>Full Name</label>
-                <input type="text" placeholder="Ramesh">
-            </div>
-            <div class="form-group" style="margin-bottom: 1rem;">
-                <label>Email Address</label>
-                <input type="email" placeholder="name@example.com">
-            </div>
-            <div class="form-group" style="margin-bottom: 1.5rem;">
-                <label>Password</label>
-                <input type="password" placeholder="Create a secure password">
-            </div>
-            <button class="btn-primary" style="width: 100%; padding: 0.9rem; border-radius: 12px; border: none; font-weight: 600; cursor: pointer;">Complete Registration</button>
+            <form onsubmit="handleFirebaseRegister(event)">
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label>Email Address</label>
+                    <input type="email" id="regEmail" placeholder="name@example.com" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label>Password</label>
+                    <input type="password" id="regPassword" placeholder="Create a secure password (min 6 chars)" required>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; padding: 0.9rem; border-radius: 12px; border: none; font-weight: 600; cursor: pointer;">Complete Registration</button>
+            </form>
             <div class="switch-modal" onclick="switchModal('loginModal')">Already have an account? <span>Login</span></div>
         </div>
     </div>
 
-    <!-- MODAL 3: WEBSITE FULL DETAILS POPUP -->
+    <!-- MODAL 3: WEBSITE DETAILS POPUP -->
     <div class="modal-overlay" id="detailsModal">
-        <div class="modal-box details-content">
+        <div class="modal-box details-content" style="color: var(--text-muted);">
             <button class="close-btn" onclick="closeModals()"><i class="fa-solid fa-xmark"></i></button>
-            <h2>Website Full Details</h2>
-            <p><strong>Utsav Pro</strong> is an advanced, high-performance creative studio built to generate festival banners and brand logos instantly with fluid iOS aesthetics.</p>
-            
-            <h3 style="font-size: 1rem; margin: 15px 0 5px; color: var(--text-main);">✨ Key Features:</h3>
-            <ul>
-                <li><strong>Festival Banner Studio:</strong> Multiple festival selections with real-time text previews, photo uploading, and custom festival naming.</li>
-                <li><strong>Logo Designer:</strong> Professional emblem-based brand logo creation with customizable typography and icons.</li>
-                <li><strong>Secure Account Management:</strong> Easy login and account creation workflows with encrypted inputs.</li>
-                <li><strong>Instant HD Export:</strong> Direct client-side rendering engine powered by html2canvas for immediate high-resolution downloads.</li>
-            </ul>
-
-            <h3 style="font-size: 1rem; margin: 15px 0 5px; color: var(--text-main);">🔒 Privacy & Security:</h3>
-            <p>All user uploaded images and generated artwork are processed securely within your browser session to protect your complete privacy.</p>
-
-            <button class="btn-primary" style="width: 100%; padding: 0.8rem; border-radius: 12px; border: none; font-weight: 600; cursor: pointer; margin-top: 10px;" onclick="closeModals()">Got It, Let's Create</button>
+            <h2 style="color: var(--text-main);">Website Full Details</h2>
+            <p><strong>Utsav Pro</strong> is an advanced creative studio built to generate festival banners and brand logos instantly using Firebase authentication.</p>
+            <button class="btn-primary" style="width: 100%; padding: 0.8rem; border-radius: 12px; border: none; font-weight: 600; cursor: pointer; margin-top: 10px;" onclick="closeModals()">Got It</button>
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- FIREBASE & APP SCRIPT LOGIC (MODULAR SDK v12.19.0) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOjdxFl56b7GSzbCQmAxNtUZf-MiPujvU",
+            authDomain: "banner-c72a8.firebaseapp.com",
+            projectId: "banner-c72a8",
+            storageBucket: "banner-c72a8.firebasestorage.app",
+            messagingSenderId: "684538025809",
+            appId: "1:684538025809:web:1baeaaaec56dc8d3a56570",
+            measurementId: "G-8CYNK87C1F"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // 1. Register Function (Attached to window so HTML onsubmit can find it)
+        window.handleFirebaseRegister = function(e) {
+            e.preventDefault();
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert('Account successfully created and logged in!');
+                    closeModals();
+                })
+                .catch((error) => {
+                    alert('Error: ' + error.message);
+                });
+        }
+
+        // 2. Login Function
+        window.handleFirebaseLogin = function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert('Login Successful!');
+                    closeModals();
+                })
+                .catch((error) => {
+                    alert('Login Failed: ' + error.message);
+                });
+        }
+
+        // 3. Logout Function
+        window.handleLogout = function() {
+            signOut(auth).then(() => {
+                alert('Logged out successfully.');
+            }).catch((error) => {
+                console.error(error);
+            });
+        }
+
+        // 4. Auth State Observer
+        onAuthStateChanged(auth, (user) => {
+            const loginBtn = document.getElementById('navLoginBtn');
+            const regBtn = document.getElementById('navRegisterBtn');
+            const logoutBtn = document.getElementById('navLogoutBtn');
+            const profileDisplay = document.getElementById('userProfileDisplay');
+
+            if (user) {
+                loginBtn.style.display = 'none';
+                regBtn.style.display = 'none';
+                logoutBtn.style.display = 'inline-block';
+                profileDisplay.style.display = 'inline-block';
+                profileDisplay.innerText = `Hi, ${user.email.split('@')[0]}`;
+            } else {
+                loginBtn.style.display = 'inline-block';
+                regBtn.style.display = 'inline-block';
+                logoutBtn.style.display = 'none';
+                profileDisplay.style.display = 'none';
+            }
+        });
+    </script>
+
+    <!-- UI APP LOGIC SCRIPT -->
     <script>
-        // Modal Control Functions with Cross Button support
+        // Modal Helpers
         function openModal(id) {
             closeModals();
             document.getElementById(id).classList.add('active');
@@ -385,15 +452,13 @@
         function switchModal(id) {
             openModal(id);
         }
-
-        // Close on background click
         document.querySelectorAll('.modal-overlay').forEach(overlay => {
             overlay.addEventListener('click', function(e) {
                 if(e.target === this) closeModals();
             });
         });
 
-        // Switch between Banner & Logo Studio Tabs
+        // Tab and Preview Logics
         function switchStudioTab(type) {
             const bannerBtn = document.getElementById('tabBannerBtn');
             const logoBtn = document.getElementById('tabLogoBtn');
@@ -419,7 +484,6 @@
             }
         }
 
-        // Banner Theme & Event Handlers
         function changeBannerTheme(select) {
             const canvas = document.getElementById('bannerDownloadArea');
             canvas.className = `studio-canvas poster-canvas ${select.value} active`;
@@ -458,7 +522,6 @@
             }
         }
 
-        // Logo Live Preview Updater
         function updateLogoPreview() {
             const brandName = document.getElementById('logoNameInput').value;
             const tagline = document.getElementById('logoTaglineInput').value;
@@ -469,7 +532,6 @@
             document.getElementById('displayLogoIcon').className = `fa-solid ${iconClass}`;
         }
 
-        // High-Res Export using html2canvas
         function downloadPoster(elementId, filenamePrefix) {
             const element = document.getElementById(elementId);
             html2canvas(element, { scale: 3, useCORS: true }).then(canvas => {
