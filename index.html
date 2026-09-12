@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Festival Poster Generator</title>
+    <!-- html2canvas for downloading the poster as image -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@400;700;800&family=Cinzel:wght@700;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #1a1a1a; color: #fff;
+            font-family: sans-serif; display: flex; flex-direction: column;
+            align-items: center; min-height: 100vh; padding: 20px;
+        }
+
+        .controls {
+            width: 100%; max-width: 450px; background: #2a2a2a;
+            padding: 20px; border-radius: 12px; margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .controls h3 { color: #fbbf24; margin-bottom: 15px; text-align: center; }
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; margin-bottom: 5px; font-size: 12px; color: #ccc; }
+        
+        .input-group input[type="text"], .input-group input[type="file"] {
+            width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #444;
+            background: #111; color: #fff;
+        }
+        
+        .warning-text { font-size: 11px; color: #fca5a5; margin-top: 5px; display: block; }
+        
+        .btn {
+            width: 100%; padding: 12px; border: none; color: #fff;
+            font-weight: bold; font-size: 16px; border-radius: 8px; cursor: pointer; margin-top: 10px;
+        }
+        .btn-generate { background: linear-gradient(to right, #f59e0b, #ea580c); }
+        .btn-download { background: linear-gradient(to right, #10b981, #059669); display: none; }
+
+        /* POSTER CANVAS */
+        .poster-container {
+            position: relative; width: 100%; max-width: 450px; height: 600px; 
+            background-image: url('https://images.unsplash.com/photo-1574359670005-7798363a0100?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover; background-position: center; border-radius: 12px;
+            overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.8); display: none;
+            border: 2px solid #fbbf24;
+        }
+
+        .poster-container::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to right, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.9) 100%);
+            z-index: 1;
+        }
+
+        .user-image {
+            position: absolute; bottom: 0; left: 5%; height: 75%; 
+            z-index: 3; pointer-events: none; filter: drop-shadow(5px 5px 15px rgba(0,0,0,0.8));
+        }
+
+        .poster-content {
+            position: absolute; top: 10%; right: 5%; width: 60%;
+            text-align: right; z-index: 4; display: flex; flex-direction: column; align-items: flex-end;
+        }
+
+        .wish-top { font-family: 'Anek Devanagari', sans-serif; font-size: 16px; color: #fff; margin-bottom: 5px; text-shadow: 2px 2px 4px #000; }
+        .main-title { font-family: 'Anek Devanagari', sans-serif; font-size: 60px; font-weight: 800; color: #fbbf24; line-height: 1; text-shadow: 3px 3px 0 #b45309, 6px 6px 15px rgba(0,0,0,0.9); margin-bottom: 5px; }
+        .sub-title { font-family: 'Anek Devanagari', sans-serif; font-size: 18px; color: #fff; font-weight: 700; margin-bottom: 15px; text-shadow: 2px 2px 4px #000; }
+        .message-text { font-family: 'Anek Devanagari', sans-serif; font-size: 12px; color: #e2e8f0; text-align: right; line-height: 1.4; margin-bottom: 30px; text-shadow: 1px 1px 3px #000; }
+        
+        .name-badge {
+            background-color: #fbbf24; padding: 10px 25px; transform: rotate(-3deg);
+            box-shadow: 4px 4px 15px rgba(0,0,0,0.6); clip-path: polygon(2% 10%, 98% 0%, 100% 90%, 0% 100%); margin-bottom: 20px;
+        }
+        .name-badge span { font-family: 'Dancing Script', cursive; font-size: 32px; font-weight: 700; color: #78350f; display: block; transform: rotate(3deg); }
+        .footer-english { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 3px; color: #fff; text-shadow: 2px 2px 5px #000; }
+        .footer-english small { font-family: sans-serif; font-size: 8px; letter-spacing: 2px; display: block; margin-top: 4px; color: #fbbf24; }
+    </style>
+</head>
+<body>
+
+    <div class="controls" id="controlPanel">
+        <h3>✨ Professional Banner Maker</h3>
+        <div class="input-group">
+            <label>Aapka Naam (Your Name)</label>
+            <input type="text" id="userNameInput" placeholder="Jaise: Ramesh">
+        </div>
+        <div class="input-group">
+            <label>Aapki Photo (Transparent PNG upload karein)</label>
+            <input type="file" id="userPhotoInput" accept="image/*">
+            <span class="warning-text">*Best result ke liye remove.bg se background hata kar photo dalein.</span>
+        </div>
+        <button class="btn btn-generate" onclick="generatePoster()">Create Poster</button>
+        <button class="btn btn-download" id="downloadBtn" onclick="downloadPoster()">📥 Download Image</button>
+    </div>
+
+    <!-- Generated Poster View -->
+    <div class="poster-container" id="posterCanvas">
+        <img src="" class="user-image" id="displayImage" alt="User Cutout">
+        
+        <div class="poster-content">
+            <div class="wish-top">आप सभी को</div>
+            <div class="main-title">दीपावली</div>
+            <div class="sub-title">की हार्दिक शुभकामनाएं</div>
+            
+            <div class="message-text">
+                यह दीपावली आपके जीवन में<br>सुख, समृद्धि, खुशियां और<br>नई उम्मीदों की रोशनी लेकर आए।
+            </div>
+
+            <div class="name-badge">
+                <span id="displayName">Ramesh</span>
+            </div>
+
+            <div class="footer-english">
+                HAPPY DIWALI
+                <small>STAY BLESSED • STAY HAPPY</small>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Page load hone par purana save kiya hua naam check karein
+        window.onload = function() {
+            let savedName = localStorage.getItem("savedBannerName");
+            if(savedName) {
+                document.getElementById('userNameInput').value = savedName;
+            }
+        };
+
+        function generatePoster() {
+            const nameInput = document.getElementById('userNameInput').value;
+            const photoInput = document.getElementById('userPhotoInput');
+            const posterCanvas = document.getElementById('posterCanvas');
+            const displayImage = document.getElementById('displayImage');
+            const displayName = document.getElementById('displayName');
+            const downloadBtn = document.getElementById('downloadBtn');
+
+            if (!nameInput) {
+                alert("Kripya apna naam darj karein");
+                return;
+            }
+
+            // Local browser me naam save karna
+            localStorage.setItem("savedBannerName", nameInput);
+
+            if (photoInput.files && photoInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    displayImage.src = e.target.result;
+                    displayName.innerText = nameInput;
+                    
+                    posterCanvas.style.display = 'block';
+                    downloadBtn.style.display = 'block'; // Show download button
+                }
+                reader.readAsDataURL(photoInput.files[0]);
+            } else {
+                alert("Kripya banner ke liye apni photo chunein");
+            }
+        }
+
+        // Poster ko Gallery me save karne ka function (Professional Export)
+        function downloadPoster() {
+            const poster = document.getElementById('posterCanvas');
+            const nameInput = document.getElementById('userNameInput').value;
+            
+            // html2canvas library ka use karke HTML ko HD Image me convert karna
+            html2canvas(poster, { scale: 2 }).then(canvas => {
+                let link = document.createElement('a');
+                link.download = `Festival_Banner_${nameInput}.png`;
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            });
+        }
+    </script>
+
+</body>
+</html>
